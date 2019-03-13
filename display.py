@@ -13,22 +13,7 @@ def get_textures(filename):
         for j in range(0, mw, 32):
             textures.append(m.subsurface(j, i, 32, 32))
     return textures
-walls = get_textures("walls")
-door = get_textures("door")
-player = get_textures("pp_hed")
-dictadd = ('a', 'm')
-animdict = { i: get_textures(i) for i in dictadd }
-
-def render_wall(p, r, c, s, x, y):
-    for i in range(4):
-        if 0 <= r + rr(i,0) < p.level.r and 0 <= c + rr(i, 1) < p.level.c and p.level.dungeon[r + rr(i,0)][c + rr(i,1)] != 0 and p.fow[r + (i-1 if i % 2 == 0 else 0)][c + (i-2 if i % 2 == 1 else 0)]:
-            s.blit(pygame.transform.rotate(walls[1], 90 * i - 90), (x, y))
-    for i in range(4):
-        if 0 <= r + rb(i, 0) < p.level.r and 0 <= c + rb(i, 1) < p.level.c:
-            if p.level.dungeon[r + rr(i, 0)][c + rr(i, 1)] !=0 and p.level.dungeon[r + rr(i + 1, 0)][c + rr(i + 1, 1)] != 0 and p.fow[r + rr(i, 0)][c + rr(i, 1)] and p.fow[r + rr(i + 1, 0)][c + rr(i + 1, 1)]:
-                s.blit(pygame.transform.rotate(walls[2], 90 * i), (x, y))
-            if p.level.dungeon[r + rr(i, 0)][c + rr(i, 1)] == p.level.dungeon[r + rr(i + 1, 0)][c + rr(i + 1, 1)] == 0 and p.level.dungeon[r + rb(i,0)][c + rb(i,1)] != 0 and p.fow[r + rb(i,0)][c + rb(i,1)]:
-                s.blit(pygame.transform.rotate(walls[0], 90 * i), (x, y))
+spr = get_textures("m")
 
 def renderp(p, s, r):
     s.fill((0,0,0))

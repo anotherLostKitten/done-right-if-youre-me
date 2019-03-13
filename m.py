@@ -10,7 +10,8 @@ class B:
             self.b[i]=-1
             for j in(-c,0,c):
                 for k in(-1,0,1):
-                    self.b[i+j+k]+=1 if(k!=0 or j!=0)and-1<i+j<r*c and-1<k+i%c<c and self.b[i+j+k]>=0 else 0
+                    if(k!=0 or j!=0)and-1<i+j<r*c and-1<(k+i)%c<c and self.b[i+j+k]>=0:
+                        self.b[i+j+k]+=1
         self.v=[1]*r*c
         self.l=r*c
     def __str__(self):
@@ -32,7 +33,7 @@ class B:
                 self.dcs(r,c)
         elif not t and self.v[self.c*r+c]!=0:
             self.v[self.c*r+c]*=-1
-        return sum(0 if(j==-1 and-1==i)or(j==0 and-1!=j)else 1 for i,j in self.b,self.v)
+        return sum(0 if(j==-1 and-1==i)or(j==0 and-1!=j)else 1 for(i,j)in(self.b,self.v))
     def dsc(self,r,c):
         if self.v[self.c*r+c]!=0:
             self.v[self.c*r+c]=0
@@ -41,3 +42,5 @@ class B:
                     for k in(-1,0,1):
                         if(k!=0 or j!=0)and-1<r+j<self.r and-1<c+k<self.c:
                             self.dsc(r+j,c+k)
+if __name__=="__main__":
+    print(B(10,10,15))
